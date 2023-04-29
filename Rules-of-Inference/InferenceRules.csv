@@ -1,0 +1,9 @@
+Premise1,Premise2,Conclusion,Rule
+p,p>q,q,"Modus Ponens"
+~q,p>q,~p,"Modus Tollens"
+p>q,q>r,p>r,"Hypothetical Syllogism"
+pvq,~p,q,"Disjunctive Syllogism"
+p,,pvq,"Addition"
+p^q,,p q,"Simplification"
+p,q,p^q,"Conjunction"
+pvq,~pvr,qvr,"Resolution"
