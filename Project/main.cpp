@@ -40,7 +40,7 @@ vector<string> parse(string s, vector<string> &infer, string delimiter, int &cou
         else if(delimiter == "test in English") infer.push_back("q");
         else if(delimiter == "Science") infer.push_back("r");
         else if(delimiter == "English Professor") infer.push_back("k");
-        else if(delimiter == " (endl)")
+        else if(delimiter == "\n")
         {
             if (infer.back() != " > ")
             {
@@ -74,14 +74,14 @@ bool modusPonens(queue<string> &statements, string premise1, string premise2)
 {
     if (premise2.substr(0,premise2.find(">"))==premise1) {statements.push(premise2.substr(premise2.find(">")+1)); return true;}
     else if(premise1.substr(0,premise1.find(">"))==premise2) {statements.push(premise1.substr(premise1.find(">")+1)); return true;}
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 bool modusTollens(queue<string> &statements, string premise1, string premise2)
 {
     if ("~"+premise2.substr(premise2.find(">")+1)==(premise1)) {statements.push("~"+premise2.substr(0,premise2.find(">"))); return true;}
     else if("~"+premise1.substr(premise1.find(">")+1)==(premise2)) {statements.push("~"+premise1.substr(premise1.find(">")+1)); return true;}
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 bool hypoSyllo(queue<string> &statements, string premise1, string premise2)
@@ -96,7 +96,7 @@ bool hypoSyllo(queue<string> &statements, string premise1, string premise2)
         statements.push(premise2.substr(0,premise2.find(">"))+premise1.substr(premise1.find(">")));
         return true;
     }
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 bool disjuncSyllo(queue<string> &statements, string premise1, string premise2)
@@ -111,7 +111,7 @@ bool disjuncSyllo(queue<string> &statements, string premise1, string premise2)
         statements.push(premise2.substr(premise2.find("v")+1));
         return true;
     }
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 bool simplification(queue<string> &statements, string premise1, string premise2)
@@ -128,7 +128,7 @@ bool simplification(queue<string> &statements, string premise1, string premise2)
         statements.push(premise2.substr(premise2.find("^")+1));
         return true;
     }
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 bool conjunction(queue<string> &statements, string premise1, string premise2)
@@ -149,7 +149,7 @@ bool conjunction(queue<string> &statements, string premise1, string premise2)
         statements.push(premise2);
         return true;
     }
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 bool resolution(queue<string> &statements, string premise1, string premise2)
@@ -164,7 +164,7 @@ bool resolution(queue<string> &statements, string premise1, string premise2)
         statements.push(premise2.substr(premise2.find("v")+1)+"v"+premise1.substr(premise1.find("v")+1));
         return true;
     }
-    else{return false;}
+    else{statements.push("NULL"); return false;}
 }
 
 int main()
@@ -209,8 +209,8 @@ int main()
             while ((pos_start = str.find_first_not_of(delims, pos_end)) != string::npos)
             {
                 pos_end = str.find_first_of(delims, pos_start + 1);
-                englishFile.push_back(str.substr(pos_start, pos_end - pos_start)+" (endl)");
-                cout<<englishFile[i]<<endl;
+                englishFile.push_back(str.substr(pos_start, pos_end - pos_start)+"\n");
+                cout<<englishFile[i];
                 i++;
             }
         }
@@ -234,7 +234,7 @@ int main()
         "If ",
         " or ",
         "Science",
-        " (endl)"
+        "\n"
         };
         // Parse into inference rules.
         for (auto i: parsing) parse(str,inferFile,i,count);
@@ -316,5 +316,6 @@ int main()
     // Step 5
     res = statements.front()==newInfer.back() ? "valid!":"invalid!";
     cout<<"------\n"
-    <<"Step 5:\nThe argument is "<<res;
+    <<"Step 5:\n"<<statements.front()<<" == "<<newInfer.back()<<endl
+    <<"The argument is "<<res<<endl;
 }
