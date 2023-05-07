@@ -1,11 +1,14 @@
 {
     "files.associations": {
+        "*.ino": "cpp",
         "ostream": "cpp",
         "deque": "cpp",
         "string": "cpp",
         "vector": "cpp",
         "*.tcc": "cpp",
         "list": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "fstream": "cpp"
     }
 }
