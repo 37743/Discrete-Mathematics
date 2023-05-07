@@ -170,8 +170,7 @@ bool resolution(queue<string> &statements, string premise1, string premise2)
 int main()
 {
     vector<vector <string>> rulesFile;
-    // T.A. Note: Replace this with your own full file path. DISCLAIMER: (NON-RELATIVE!)
-    ifstream File1("/[home/punk/University/Projects/General-Project/Discrete-Mathematics/Rules-of-Inference/InferenceRules.csv]");
+    ifstream File1("./Rules-of-Inference/InferenceRules.csv");
 	if (File1.is_open())
     {
         int i=1;
@@ -196,8 +195,7 @@ int main()
 	File1.close();
 
     vector<string> englishFile;
-    // T.A. Note: Replace this with your own full file path. DISCLAIMER: (NON-RELATIVE!)
-    ifstream File2("/home/punk/University/Projects/General-Project/Discrete-Mathematics/Project/test.txt");
+    ifstream File2("./Project/test.txt");
 	if (File2.is_open())
     {
         int i=0;
